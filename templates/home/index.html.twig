@@ -27,7 +27,7 @@
                 <tr>
                     <th scope="col">{{ todo.name }}</th>
                     <th scope="col">{{ todo.description }}</th>
-                    <th scope="col">{{ todo.limitedAt|date('H:i') }}</th>
+                    <th scope="col">{{ todo.limitedAt|date('d/m/y') }}</th>
                     <th scope="col">{% if todo.statut == false %} <p>A faire !</p> {% else %} <p>Fait !</p> {% endif %} </th>
                 </tr>
                 {% endfor %}
