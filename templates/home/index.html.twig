@@ -5,12 +5,16 @@
 
 {% block body %}
 
-<div class="container col-12 col-lg-6 mt-5">
+<div class="container col-12 col-lg-6 mt-5 authenticated">
     <h2>Bienvenue sur l'appli des listes de choses à faire</h2>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <img class="imgAvatar" src="uploads/avatar/{{ app.user.avatar }}" alt="votre avatar">
+    {% endif %}
 </div>
 
 
 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
 
     <div class="container mt-5 col-12 col-lg-6">
             <table class="table table-dark table-striped">
