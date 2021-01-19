@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur le site des toDoList{% endblock %}
+
+
+{% block body %}
+
+<div class="container col-12 col-lg-6 mt-5">
+    <h2>Bienvenue sur l'appli des listes de choses à faire</h2>
+</div>
+
+
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+    <div class="container mt-5 col-12 col-lg-6">
+            <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Date limite</th>
+                    <th scope="col">Fait/ou pas</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for todo in todos %}
+                <tr>
+                    <th scope="col">{{ todo.name }}</th>
+                    <th scope="col">{{ todo.description }}</th>
+                    <th scope="col">{{ todo.limitedAt|date('H:i') }}</th>
+                    <th scope="col">{% if todo.statut == false %} <p>A faire !</p> {% else %} <p>Fait !</p> {% endif %} </th>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% else %}
+    <div class="container col-12 col-lg-6 mt-5">
+        <h4>Connectez-vous ou inscrivez-vous pour utilisez l'application ! Enjoy !</h4>
+    </div>
+    <div class="container mt-5 col-6 boutonsHome">
+        <a href="{{ path('app_login') }}" class="btn btn-success">Connexion</a>
+        <a href="{{ path('app_registration') }}" class="btn btn-secondary">Inscription</a>
+    </div>
+
+{% endif %}
+
+
+
+
+{% endblock %}

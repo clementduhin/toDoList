@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+
+<div class="container col-12 col-lg-6 mt-5">
+    <h2>Inscription à l'appli des listes de choses à faire</h2>
+</div>
+
+<div class="container col-12 col-lg-6 mt-5">
+    {{ form_start(form) }}
+        <div>{{ form_row(form.email, {label: 'Votre mail', attr: {'class': 'form-control col-12 col-lg-6 champType mb-2'}}) }}</div>
+        <div>{{ form_row(form.password, {label: 'Mot de passe', attr: {'class': 'form-control col-12 col-lg-6 champType mb-2'}}) }}</div>
+        <div>
+            <div class="errorMessage">
+                {{ form_errors(form.confirm_password) }}
+            </div>
+            {{ form_label(form.confirm_password, 'Confirmer le mot de passe') }}
+            {{ form_widget(form.confirm_password, {attr: {'class': 'form-control col-12 col-lg-6 champType mb-2'}}) }}
+        </div>
+        <div>{{ form_row(form.firstName, {label: 'Prénom', attr: {'class': 'form-control col-12 col-lg-6 champType mb-2'}}) }}</div>
+        <div>{{ form_row(form.photo, {label: 'Votre avatar', attr: {'class': 'form-control col-12 col-lg-6 champType mb-2'}}) }}</div>
+
+
+    {{ form_widget(form.submit, {attr: {'class': 'btn btn-success' }}) }}
+
+{{ form_end(form) }}
+
+</div>
+
+    
+
+
+{% endblock %}
