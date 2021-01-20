@@ -1,0 +1,21 @@
+
+.btnDeco {
+    position: absolute;
+    right: 0%;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.imgAvatar {
+    height: 50px;
+    width: auto;
+    position: absolute;
+    right: 0%;
+    opacity: 0;
+}
+
+.visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 2s;
+}

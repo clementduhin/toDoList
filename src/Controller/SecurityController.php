@@ -45,14 +45,15 @@ class SecurityController extends AbstractController
     /**
     * @Route("/inscription", name="app_registration")
     */
-    public function Registration(Request $request, ObjectManager $monManager, UserPasswordEncoderInterface $monEncodeur, string $photoDir) {
+    public function Registration(Request $request, ObjectManager $monManager, UserPasswordEncoderInterface $monEncodeur, string $photoDir, \Swift_Mailer $mailer) {
 
         $user = new User;
 
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
-            $hashedPassword = $monEncodeur->encodePassword( $user ,$user->getPassword());           
+            $hashedPassword = $monEncodeur->encodePassword( $user ,$user->getPassword()); 
+            $password = $user->getPassword();          
             $user->setPassword($hashedPassword);
 
             if ($photo = $form['photo']->getData()) {
@@ -67,6 +68,20 @@ class SecurityController extends AbstractController
 
             $monManager->persist($user);
             $monManager->flush();
+
+            $mail = (new \Swift_Message('Inscription confirmé'))
+                ->setFrom('toDo@bot.com')
+                ->setTo($user->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'emails/registration.html.twig',
+                        ['firstName' => $user->getFirstName(),
+                          'password' => $password]
+                    ),
+                    'text/html'
+                );
+                $mailer->send($mail);
+
             return $this->redirectToRoute('home');
         }
 

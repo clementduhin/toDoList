@@ -18,6 +18,8 @@ class HomeController extends AbstractController
 
         $repoToDo = $this->getDoctrine()->getRepository(Todo::class);
         $allToDo = $repoToDo->findAll();
+        $user = $this->getUser();
+        dump($user);
 
         return $this->render('home/index.html.twig', [
             'todos' => $allToDo,
