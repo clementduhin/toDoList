@@ -14,8 +14,23 @@
 </div>
 
 
-{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    
 
+
+
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+<div class="container col-12 col-lg-6 mt-5">
+    {{ form_start(formNewTodo) }}
+        <div>{{ form_row(formNewTodo.name, {label: 'Nom de la nouvelle action à effectuer', attr: {'class': 'form-control col-12 col-lg-6 champType mb-2'}}) }}</div>
+        <div>{{ form_row(formNewTodo.description, {label: 'Description', attr: {'class': 'form-control col-12 col-lg-6 champType mb-2'}}) }}</div>
+        <div>{{ form_row(formNewTodo.statut) }}</div>
+        <div>{{ form_row(formNewTodo.limitedAt, {label: 'Date limite', attr: {'class': 'form-control col-12 col-lg-6 champType mb-2'}}) }}</div>
+
+    {{ form_widget(formNewTodo.submit, {attr: {'class': 'btn btn-success' }}) }}
+
+{{ form_end(formNewTodo) }}
+
+</div>
 
     <div class="container mt-5 col-12 col-lg-6">
             <table class="table table-dark table-striped">
@@ -41,6 +56,7 @@
     </div>
 
 {% else %}
+
     <div class="container col-12 col-lg-6 mt-5">
         <h4>Connectez-vous ou inscrivez-vous pour utilisez l'application ! Enjoy !</h4>
     </div>
