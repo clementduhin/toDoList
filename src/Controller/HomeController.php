@@ -31,11 +31,11 @@ class HomeController extends AbstractController
         $formNewTodo = $this->createForm(TodoType::class, $newToDo);
         $formNewTodo->handleRequest($request);
 
-        if (isset($_POST['name'], $_POST['description'], $_POST['statut'], $_POST['limitedAt'])) {
+        if (isset($_POST['name'], $_POST['description'], $_POST['limitedAt'])) {
             $newToDo->setCreatedAt(new \DateTime())
                 ->setName($_POST['name'])
                 ->setDescription($_POST['description'])
-                ->setStatut($_POST['statut'])
+                ->setStatut(false)
                 ->setLimitedAt(new \DateTime());
 
             $monManager->persist($newToDo);

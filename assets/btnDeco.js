@@ -4,6 +4,8 @@ const inputStatut = document.querySelector('.newStatut');
 const inputDate = document.querySelector('.newLimitedAt');
 
 
+
+
 $(".imgAvatar").hover(function(){
     $(".btnDeco").addClass('visible');
     $(this).removeClass('visible');
@@ -17,19 +19,14 @@ $(".btnDeco").mouseleave(function(){
 function addToDo(){
 
     var maRequeteAjout = new XMLHttpRequest();
-
     maRequeteAjout.open('POST','/');
-
     maRequeteAjout.setRequestHeader('Content-type','application/x-www-form-urlencoded');
-    
     let newName = inputName.value;
     let newDescription = inputDescription.value;
-    let newStatut = inputStatut.value;
-    let newLimitedAt = new Intl.DateTimeFormat('fr-FR').format(new Date());
-    let date = new Date();
-    let mesParametres = 'name=' + newName + '&description=' + newDescription + '&statut=' + newStatut + '&limitedAt=' + newLimitedAt;
-
+    let newLimitedAt = new Date();
+    let mesParametres = 'name=' + newName + '&description=' + newDescription + '&limitedAt=' + newLimitedAt;
     maRequeteAjout.send(mesParametres);
+    console.log('coucou');
 
     return  $.ajax({  
         url:        '/viewToDo',  
