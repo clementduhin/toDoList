@@ -23,7 +23,7 @@
      {{ form_start(formNewTodo) }}
         <div>{{ form_row(formNewTodo.name, {label: 'Nom de la nouvelle action à effectuer', attr: {'class': 'newName form-control mb-2'}}) }}</div>
         <div>{{ form_row(formNewTodo.description, {label: 'Description', attr: {'class': 'newDescription form-control mb-2'}}) }}</div>
-        <div>{{ form_row(formNewTodo.statut,{label: '', attr: {'class': 'newStatut hidden'}} ) }}</div>
+        <div>{{ form_row(formNewTodo.statut,{label: '', attr: {'class': 'newStatut'}} ) }}</div>
         <div>{{ form_row(formNewTodo.limitedAt, {label: 'Date limite', attr: {'class': 'newLimitedAt form-control mb-2'}}) }}</div>
 
     {{ form_widget(formNewTodo.submit, {attr: {'class': 'btn btn-success addToDo' }}) }}

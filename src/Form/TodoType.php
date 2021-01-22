@@ -17,7 +17,9 @@ class TodoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('limitedAt', DateType::class)
+            ->add('limitedAt', DateType::class, [
+                'widget' => 'single_text',
+            ])
             ->add('statut', CheckboxType::class, [
                 'required' => false
             ])

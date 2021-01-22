@@ -14,8 +14,9 @@ function addToDo(){
     let newName = inputName.value;
     let newDescription = inputDescription.value;
     let newStatut = inputStatut.value;
-    let newLimitedAt = new Date();
-    let date = new Date();
+    let newLimitedAt = inputDate.value;
+    console.log(newLimitedAt);
+    console.log(newLimitedAt);
     let mesParametres = 'name=' + newName + '&description=' + newDescription + '&statut=' + newStatut + '&limitedAt=' + newLimitedAt;
 
     maRequeteAjout.send(mesParametres);

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Todo;
 use App\Form\TodoType;
+use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,11 +33,13 @@ class HomeController extends AbstractController
         $formNewTodo->handleRequest($request);
 
         if (isset($_POST['name'], $_POST['description'], $_POST['limitedAt'])) {
+            $dateToImplement = $_POST['limitedAt'];
+            $dateToImplement = DateTime::createFromFormat('Y-m-d', $dateToImplement);
             $newToDo->setCreatedAt(new \DateTime())
                 ->setName($_POST['name'])
                 ->setDescription($_POST['description'])
                 ->setStatut(false)
-                ->setLimitedAt(new \DateTime());
+                ->setLimitedAt($dateToImplement);
 
             $monManager->persist($newToDo);
             $user = $this->getUser();
