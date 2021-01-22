@@ -44,13 +44,13 @@ class HomeController extends AbstractController
             $monManager->flush();
         }
 
-        if ($formNewTodo->isSubmitted() && $formNewTodo->isValid()) {
-            $newToDo->setCreatedAt(new \DateTime());
-            $monManager->persist($newToDo);
-            $user = $this->getUser();
-            $newToDo->addUser($user);
-            $monManager->flush();
-        }
+        // if ($formNewTodo->isSubmitted() && $formNewTodo->isValid()) {
+        //     $newToDo->setCreatedAt(new \DateTime());
+        //     $monManager->persist($newToDo);
+        //     $user = $this->getUser();
+        //     $newToDo->addUser($user);
+        //     $monManager->flush();
+        // }
 
         if (isset($toDoUser)) {
             return $this->render('home/index.html.twig', [
@@ -85,7 +85,43 @@ class HomeController extends AbstractController
                     'name' => $todo->getName(),
                     'description' => $todo->getDescription(),
                     'limitedAt' => $todo->getLimitedAt(),
-                    'statut' => $todo->getStatut()
+                    'statut' => $todo->getStatut(),
+                    'id' => $todo->getId()
+                );
+                $jsonData[$idx++] = $data;
+            }
+            return new JsonResponse($jsonData);
+        } else {
+            return $this->render('home/index.html.twig');
+        }
+    }
+
+    /**
+     * @Route("/deleteToDo/{id}", name="deleteToDo")
+     */
+
+    public function deleteToDo($id, ObjectManager $monManager, Request $request): Response
+    {
+        $repoToDo = $this->getDoctrine()->getRepository(Todo::class);
+        $repoToDelete = $repoToDo->find($id);
+
+        $monManager->remove($repoToDelete);
+        $monManager->flush();
+
+        $user = $this->getUser();
+        if ($user) {
+            $toDoUser = $user->getTodos();
+        }
+        if ($request->isXmlHttpRequest() || $request->query->get('showJson') == 1) {
+            $jsonData = array();
+            $idx = 0;
+            foreach ($toDoUser as $todo) {
+                $data = array(
+                    'name' => $todo->getName(),
+                    'description' => $todo->getDescription(),
+                    'limitedAt' => $todo->getLimitedAt(),
+                    'statut' => $todo->getStatut(),
+                    'id' => $todo->getId()
                 );
                 $jsonData[$idx++] = $data;
             }

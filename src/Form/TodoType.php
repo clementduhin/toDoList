@@ -23,8 +23,7 @@ class TodoType extends AbstractType
             ])
             ->add('description', TextareaType::class)
             ->add('name', TextType::class)
-            ->add('submit', SubmitType::class)
-        ;
+            ->add('submit', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
